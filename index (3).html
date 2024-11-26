@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juegos Luis Angel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Incluir SweetAlert2 -->
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+        }
+        h2 {background-color: aliceblue;}
+    </style>
+    <script>
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === 'luisangel' && password === '12345') {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('gameContent').style.display = 'block';
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Bienvenido',
+                    text: 'Bienvenido a la zona de juegos Luis Angel',
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Usuario o contraseña incorrectos',
+                });
+            }
+        }
+
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('togglePassword');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        function showGame(game) {
+            const gameDisplay = document.getElementById('gameDisplay');
+            let gameUrl = '';
+
+            switch (game) {
+                case 'ticTacToe':
+                    gameUrl = 'https://3enraya.es/';
+                    break;
+                case 'culebrita':
+                    gameUrl = 'https://poki.com/es/g/snake-cool';
+                    break;
+                case 'flappyBird':
+                    gameUrl = 'https://flappybird.io/';
+                    break;
+                case 'sopaDeLetras':
+                    gameUrl = 'https://api.razzlepuzzles.com/wordsearch?locale=es';
+                    break;
+                case 'ajedrez':
+                    gameUrl = 'https://poki.com/es/g/master-chess';
+                    break;
+                case 'sudoku':
+                    gameUrl = 'https://poki.com/es/g/sudoku-village';
+                    break;
+                case 'pacMan':
+                    gameUrl = 'https://www.pacmangratis.net/pacman.php';
+                    break;
+                case 'tetris':
+                    gameUrl = 'https://www.tetrisclasico.com/';
+                    break;
+                default:
+                    gameUrl = '';
+            }
+
+            if (gameUrl) {
+                window.open(gameUrl, '_blank'); // Abre el juego en una nueva pestaña
+            }
+        }
+
+        function showGameList() {
+            Swal.fire({
+                icon: 'info',
+                title: 'Lista de Juegos',
+                text: 'Mostrando la lista de juegos disponibles.', // Aquí puedes implementar la lógica para mostrar la lista de juegos
+            });
+        }
+
+        function addNewGame() {
+            Swal.fire({
+                icon: 'info',
+                title: 'Agregar Nuevo Juego',
+                text: 'Funcionalidad para agregar un nuevo juego.', // Aquí puedes implementar la lógica para agregar un nuevo juego
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplaza suavemente hacia la parte superior de la página
+        }
+    </script>
+</head>
+<body class="bg-gray-900 flex items-center justify-center min-h-screen">
+    <div id="loginForm" class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-sm">
+        <h1 class="text-3xl text-center text-green-500 mb-6">Juegos Luis Angel</h1>
+        <form>
+            <div class="mb-4">
+                <label class="block text-green-500 text-sm font-bold mb-2" for="username">
+                    Username
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Enter your username">
+            </div>
+            <div class="mb-6">
+                <label class="block text-green-500 text-sm font-bold mb-2" for="password">
+                    Password
+                </label>
+                <div class="relative">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Enter your password">
+                    <i class="fas fa-eye absolute right-3 top-3 cursor-pointer" id="togglePassword" onclick="togglePasswordVisibility()"></i>
+                </div>
+            </div>
+            <div class="flex items-center justify-center">
+                <button onclick="validateLogin()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    Login
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="gameContent" style="display: none;">
+        <div class="bg-gradient-to-r from-purple-500 to-blue-500 p-4 text-center text-white">
+            <div class="flex items-center justify-center">
+                <i class="fas fa-gamepad text-2xl mr-2"></i>
+                <h1 class="text-2xl font-bold">Juegos Luis Angel</h1>
+            </div>
+            <div class="mt-4">
+                <input class="w-1/2 p-2 rounded-md text-gray-700" placeholder="¿A qué jugamos hoy?" type="text"/>
+            </div>
+        </div>
+        <div class="p-4">
+            <h2 class="text-2xl font-bold text-center mb-4">Juegos Más Jugados</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <img alt="Tic Tac Toe game image" class="w-full rounded-md mb-2" height="150" src="https://storage.googleapis.com/a1aa/image/igsQFLDlJ1J3HBI7GM9tdBKlfefKf7JlTmkcdqQjRJdJfMneE.jpg" width="150" onclick="showGame('ticTacToe')"/>
+                    <a class="text-center text-blue-600 underline block" href="#" onclick="showGame('ticTacToe')">Tic Tac Toe</a>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <img alt="Culebrita game image" class="w-full rounded-md mb-2" height="150" src="https://storage.googleapis.com/a1aa/image/tHqPfGH7srx7Jy1XIXKsUVUInG7xeZxelHGjzTUWvMkmPzpnA.jpg" width="150" onclick="showGame('culebrita')"/>
+                    <a class="text-center text-blue-600 underline block" href="#" onclick="showGame('culebrita')">Culebrita</a>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <img alt="Flappy Bird game image" class="w-full rounded-md mb-2" height="150" src="https://storage.googleapis.com/a1aa/image/WOLEicjdTK61Op6O94kF1aPLEaee8MIf3e9DmpPhM9eEeZO9E.jpg" width="150" onclick="showGame('flappyBird')"/>
+                    <a class="text-center text-blue-600 underline block" href="#" onclick="showGame('flappyBird')">Flappy Bird</a>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <img alt="Sopa de letra game image" class="w-full rounded-md mb-2" height="150" src="https://storage.googleapis.com/a1aa/image/CLbu0drH8GZZE5JUJenfyYyVYdJWbEGJxBTFKeQ2Xd2eeMneE.jpg" width="150" onclick="showGame('sopaDeLetras')"/>
+                    <a class="text-center text-blue-600 underline block" href="#" onclick="showGame('sopaDeLetras')">Sopa de letra</a>
+                </div>
+            </div>
+        </div>
+        <div class="p-4">
+            <h2 class="text-2xl font-bold text-center mb-4">Juegos Más Populares</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <img alt="Ajedrez game image" class="w-full rounded-md mb-2" height="150" src="https://storage.googleapis.com/a1aa/image/J75siHUCcRpWAhvMfs83ywmhfOv3xRXHkAKGPu9S3rvYr50TA.jpg" width="150" onclick="showGame('ajedrez')"/>
+                    <a class="text-center text-blue-600 underline block" href="#" onclick="showGame('ajedrez')">Ajedrez</a>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <img alt="Sudoku game image" class="w-full rounded-md mb-2" height="150" src="https://storage.googleapis.com/a1aa/image/2N2FvVZJYEYhAForc3FLi6R2Mwc44Pgctf1MGHvCuXtr1c6JA.jpg" width="150" onclick="showGame('sudoku')"/>
+                    <a class="text-center text-blue-600 underline block" href="#" onclick="showGame('sudoku')">Sudoku</a>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <img alt="Pac-Man game image" class="w-full rounded-md mb-2" height="150" src="https://storage.googleapis.com/a1aa/image/POeA1B9fM0nMvkIQCtwtfhiLZCfsqyeToA4s9QsrwAYkaNneE.jpg" width="150" onclick="showGame('pacMan')"/>
+                    <a class="text-center text-blue-600 underline block" href="#" onclick="showGame('pacMan')">Pac-Man</a>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <img alt="Tetris game image" class="w-full rounded-md mb-2" height="150" src="https://storage.googleapis.com/a1aa/image/Z7f2KUxykLXrMSWSIng1Xe0taxjSUE8NFXJbSxVG8t0Wr50TA.jpg" width="150" onclick="showGame('tetris')"/>
+                    <a class="text-center text-blue-600 underline block" href="#" onclick="showGame('tetris')">Tetris</a>
+                </div>
+            </div>
+        </div>
+        <div class="fixed bottom-0 w-full bg-gray-500 p-2 flex justify-around items-center"> <!-- Cambiado p-4 a p-2 -->
+            <i class="fas fa-th-large text-white text-2xl" onclick="showGameList()"></i> <!-- Botón para mostrar la lista de juegos -->
+            <div class="bg-gray-700 p-2 rounded-full" onclick="addNewGame()"> <!-- Cambiado p-4 a p-2 -->
+                <i class="fas fa-plus text-white text-2xl"></i> <!-- Botón para agregar un nuevo juego -->
+            </div>
+            <i class="fas fa-chevron-up text-white text-2xl" onclick="scrollToTop()"></i> <!-- Botón para subir a la parte superior -->
+        </div>
+    </div>
+
+    <!-- Contenedor para mostrar el juego -->
+    <div id="gameDisplay" style="display: none;" class="p-4 text-white">
+        <!-- Aquí se cargará el juego -->
+    </div>
+</body>
+</html>
